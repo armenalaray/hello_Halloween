@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Halloween_Main_Project.CSharp", "Halloween_Main_Project.CSharp.csproj", "{B08A44B9-F40D-8E2F-2B96-9807853389FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Halloween_Main_Project.CSharp.Editor", "Halloween_Main_Project.CSharp.Editor.csproj", "{0662684C-56A9-8546-5191-8686E4FFBAB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{B08A44B9-F40D-8E2F-2B96-9807853389FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B08A44B9-F40D-8E2F-2B96-9807853389FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B08A44B9-F40D-8E2F-2B96-9807853389FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0662684C-56A9-8546-5191-8686E4FFBAB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0662684C-56A9-8546-5191-8686E4FFBAB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0662684C-56A9-8546-5191-8686E4FFBAB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0662684C-56A9-8546-5191-8686E4FFBAB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

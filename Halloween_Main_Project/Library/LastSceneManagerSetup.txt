@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Halloween_Main_Scene.unity
+- path: Assets/Main.unity
   isLoaded: 1
   isActive: 1
