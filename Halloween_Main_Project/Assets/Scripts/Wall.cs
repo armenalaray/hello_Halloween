@@ -20,6 +20,7 @@ public class Wall : MonoBehaviour {
         hp -= loss;
         if(hp <= 0)
         {
+            //wall disapppears si su hp es menor a 0
             gameObject.SetActive(false);
         }
     }

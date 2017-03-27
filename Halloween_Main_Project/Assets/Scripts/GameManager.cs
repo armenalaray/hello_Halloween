@@ -5,7 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
     public static GameManager instance = null;//singleton -static means that the variable belongs to the class rather than being an instanciation of the object. 
     public BoardManager boardScript;
-
+    public int playerFoodPoints = 100;
+    [HideInInspector]
+    public bool playersTurn = true;
 
     private int level = 3;
 	// Use this for initialization
@@ -28,6 +30,11 @@ public class GameManager : MonoBehaviour {
     void InitGame()
     {
         boardScript.SetupScene(level);
+    }
+
+    public void GameOver()
+    {
+        enabled = false;
     }
 
 }
