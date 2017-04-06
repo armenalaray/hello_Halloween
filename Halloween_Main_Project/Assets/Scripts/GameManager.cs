@@ -36,5 +36,10 @@ public class GameManager : MonoBehaviour {
     {
         enabled = false;
     }
-
+    public void Prueba(int a)
+    {
+        //Howdy
+        a++;
+    }
+      
 }
