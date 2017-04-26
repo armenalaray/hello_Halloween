@@ -24,6 +24,8 @@ public abstract class MovingObject : MonoBehaviour {
         Vector2 end = start + new Vector2(xDir, yDir);
         boxCollider.enabled = false;//prevent from hitting own collider
         hit = Physics2D.Linecast(start, end, blockingLayer);
+
+        //Debug.Log("hit= "+ hit.collider);
         //re-enable box collider after linecast
         boxCollider.enabled = true;
 
@@ -31,6 +33,7 @@ public abstract class MovingObject : MonoBehaviour {
         {
             StartCoroutine(SmoothMovement(end));
             return true;
+            
         }
         //the move was unsuccesfull
         return false;
@@ -56,7 +59,8 @@ public abstract class MovingObject : MonoBehaviour {
     {
         RaycastHit2D hit;
         bool canMove = Move(xDir, yDir, out hit);
-
+        Debug.Log("xDir=" + xDir + "YDIR" + yDir);
+        //Debug.Log("canmove = "+ canMove);
         if (hit.transform == null)
             return;
 
