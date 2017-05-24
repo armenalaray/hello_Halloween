@@ -61,11 +61,92 @@ public class BoardManagerFixed : MonoBehaviour
         {
             for (int y = -1; y < rows + 1; y++)
             {
-                GameObject toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
-                if (x == -1 || x == columns || y == -1 || y == rows)
+                GameObject toInstantiate = floorTiles[4];
+                if (x == 0)
                 {
-                    toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                    if (y == 0)
+                    {
+                        toInstantiate = floorTiles[6];
+                    }
+                    else if (y == rows - 1)
+                    {
+                        toInstantiate = floorTiles[0];
+                    }
+                    else
+                    {
+                        toInstantiate = floorTiles[3];
+                    }
+
                 }
+                else if (x == columns -1)
+                {
+                    if (y == 0)
+                    {
+                        toInstantiate = floorTiles[8];
+                    }
+                    else if (y == rows - 1)
+                    {
+                        toInstantiate = floorTiles[2];
+                    }
+                    else
+                    {
+                        toInstantiate = floorTiles[5];
+                    }
+                }
+                else
+                {
+                    if (y == 0)
+                    {
+                        toInstantiate = floorTiles[7];
+                    }
+                    else if (y == rows -1)
+                    {
+                        toInstantiate = floorTiles[1];
+                    }
+                }
+
+                if (x == -1)
+                {
+                    if (y == -1)
+                    {
+                        toInstantiate = outerWallTiles[5];
+                    }else if(y == rows)
+                    {
+                        toInstantiate = outerWallTiles[0];
+                    }
+                    else
+                    {
+                        toInstantiate = outerWallTiles[3];
+                    }
+                    
+                }
+                else if (x == columns)
+                {
+                    if (y == -1)
+                    {
+                        toInstantiate = outerWallTiles[7];
+                    }
+                    else if (y == rows)
+                    {
+                        toInstantiate = outerWallTiles[2];
+                    }
+                    else
+                    {
+                        toInstantiate = outerWallTiles[4];
+                    }
+                }
+                else
+                {
+                    if (y == -1)
+                    {
+                        toInstantiate = outerWallTiles[6];
+                    }
+                    else if (y == rows)
+                    {
+                        toInstantiate = outerWallTiles[1];
+                    }
+                }
+
 
                 GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0.0f), Quaternion.identity) as GameObject;
                 instance.transform.SetParent(boardHolder);
