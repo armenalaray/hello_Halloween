@@ -173,6 +173,11 @@ public class BoardManagerFixed : MonoBehaviour
             Vector3 randomPosition = RandomPosition();
             GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
             Instantiate(tileChoice, randomPosition, Quaternion.identity);
+
+            Renderer myRenderer = tileChoice.GetComponent<Renderer>();
+            myRenderer.sortingOrder = (int)randomPosition.x;
+            Debug.Log(randomPosition);
+
         }
     }
 

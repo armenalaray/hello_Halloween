@@ -59,7 +59,7 @@ public abstract class MovingObject : MonoBehaviour {
     {
         RaycastHit2D hit;
         bool canMove = Move(xDir, yDir, out hit);
-        Debug.Log("xDir=" + xDir + "YDIR" + yDir);
+        //Debug.Log("xDir=" + xDir + "YDIR" + yDir);
         //Debug.Log("canmove = "+ canMove);
         if (hit.transform == null)
             return;
