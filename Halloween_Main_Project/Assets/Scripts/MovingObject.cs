@@ -4,7 +4,8 @@ using UnityEngine;
 
 //abstract class - allows members to be incomplete, ant to be defined into derived classes
 public abstract class MovingObject : MonoBehaviour {
-    public float moveTime = 0.1f;//movement of the object
+    public float moveTime = 0.01f;//movement of the object
+    public float turnDelay = 1.0f;
     public LayerMask blockingLayer;//layer to detect colisions
 
     private BoxCollider2D boxCollider;
@@ -47,6 +48,7 @@ public abstract class MovingObject : MonoBehaviour {
         while(sqrRemainingDistance > float.Epsilon)
         {
             Vector3 newPosition = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
+            Debug.Log(newPosition);
             rb2D.MovePosition(newPosition);
             //recalculate Remaining distance
             sqrRemainingDistance = (transform.position - end).sqrMagnitude;
@@ -59,7 +61,7 @@ public abstract class MovingObject : MonoBehaviour {
     {
         RaycastHit2D hit;
         bool canMove = Move(xDir, yDir, out hit);
-        Debug.Log("xDir=" + xDir + "YDIR" + yDir);
+        //Debug.Log("xDir=" + xDir + "YDIR" + yDir);
         //Debug.Log("canmove = "+ canMove);
         if (hit.transform == null)
             return;
