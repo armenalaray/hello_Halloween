@@ -18,6 +18,8 @@ public class Player : MovingObject {
     private Animator animator;
     private int food;
 
+    delegate void MyDelegate(int num1, int num2);
+    MyDelegate myDelegate; 
 	// Use this for override an inherited function
 	protected override void Start () {
         animator = GetComponent<Animator>();
@@ -64,6 +66,12 @@ public class Player : MovingObject {
 
         foodText.text = "Food: " + food;
 
+        //Debug.Log("xDir= " + xDir + " YDir= " + yDir);
+        //animation triggers
+        myDelegate = animationTrigger;
+        myDelegate(xDir, yDir);
+
+
         base.AttemptMove<T>(xDir, yDir);
 
         //RaycastHit2D hit;
@@ -71,6 +79,101 @@ public class Player : MovingObject {
         CheckIfGameOver();
 
         GameManager.instance.playersTurn = false;
+    }
+
+    void animationTrigger(int xDir, int yDir)
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdleFront"))
+        {
+            if (yDir == -1)
+            {
+                animator.SetTrigger("pIdleFWalkFront");
+                
+            }
+            else if(yDir == 1)
+            {
+                animator.SetTrigger("pIdleFWalkBack");
+                Debug.Log("arriba");
+            }
+            else
+            {
+                if(xDir == 1)
+                {
+                    animator.SetTrigger("pIdleFWalkRight");
+                }
+                else
+                {
+                    animator.SetTrigger("pIdleFWalkLeft");
+                }
+            }
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("playerIdleRight"))
+        {
+            if (yDir == -1)
+            {
+                animator.SetTrigger("pIdleRWalkFront");
+            }
+            else if (yDir == 1)
+            {
+                animator.SetTrigger("pIdleRWalkBack");
+            }
+            else
+            {
+                if (xDir == 1)
+                {
+                    animator.SetTrigger("pIdleRWalkRight");
+                }
+                else
+                {
+                    animator.SetTrigger("pIdleRWalkLeft");
+                }
+            }
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("playerIdleLeft"))
+        {
+            if (yDir == -1)
+            {
+                animator.SetTrigger("pIdleLWalkFront");
+            }
+            else if (yDir == 1)
+            {
+                animator.SetTrigger("pIdleLWalkBack");
+            }
+            else
+            {
+                if (xDir == 1)
+                {
+                    animator.SetTrigger("pIdleLWalkRight");
+                }
+                else
+                {
+                    animator.SetTrigger("pIdleLWalkLeft");
+                }
+            }
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("playerIdleBack"))
+        {
+            if (yDir == -1)
+            {
+                animator.SetTrigger("pIdleBWalkFront");
+                Debug.Log("abajo");
+            }
+            else if (yDir == 1)
+            {
+                animator.SetTrigger("pIdleBWalkBack");
+            }
+            else
+            {
+                if (xDir == 1)
+                {
+                    animator.SetTrigger("pIdleBWalkRight");
+                }
+                else
+                {
+                    animator.SetTrigger("pIdleBWalkLeft");
+                }
+            }
+        }
     }
     //check triggers with food and soda
     private void OnTriggerEnter2D(Collider2D other)

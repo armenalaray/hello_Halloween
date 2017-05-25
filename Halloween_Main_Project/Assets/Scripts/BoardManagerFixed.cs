@@ -176,7 +176,7 @@ public class BoardManagerFixed : MonoBehaviour
 
             Renderer myRenderer = tileChoice.GetComponent<Renderer>();
             myRenderer.sortingOrder = (int)randomPosition.x;
-            Debug.Log(randomPosition);
+            //Debug.Log(randomPosition);
 
         }
     }
