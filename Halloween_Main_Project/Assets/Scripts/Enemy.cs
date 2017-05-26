@@ -10,6 +10,9 @@ public class Enemy : MovingObject {
     private Transform target;
     private bool skipMove;
 
+    public AudioClip enemyAttack1;
+    public AudioClip enemyAttack2;
+
 	// Use this for initialization
 	protected override void Start () {
         GameManager.instance.AddEnemyToList(this);
@@ -50,7 +53,8 @@ public class Enemy : MovingObject {
     protected override void OnCantMove<T>(T component)
     {
         Player hitPlayer = component as Player;
-        animator.SetTrigger("enemyAttack");
         hitPlayer.LoseFood(playerDamage);
+        animator.SetTrigger("enemyAttack");
+        SoundManager.instance.RandomizeSfx(enemyAttack1, enemyAttack2);
     }
 }

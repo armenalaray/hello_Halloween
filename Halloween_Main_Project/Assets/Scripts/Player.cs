@@ -14,9 +14,18 @@ public class Player : MovingObject {
     public float restartLevelDelay = 1.0f;
     public Text foodText;
 
+    public AudioClip moveSound1;
+    public AudioClip moveSound2;
+    public AudioClip eatSound1;
+    public AudioClip eatSound2;
+    public AudioClip drinkSound1;
+    public AudioClip drinkSound2;
+    public AudioClip gameOverSound;
 
     private Animator animator;
     private int food;
+
+    //private Vector2 touchOrigin = -Vector2.one;
 
     delegate void MyDelegate(int num1, int num2);
     MyDelegate myDelegate; 
@@ -44,7 +53,7 @@ public class Player : MovingObject {
         //Debug.Log(GameManager.instance.playersTurn);
         int horizontal =0 ;
         int vertical = 0;
-
+    //#if UNITY_STANDALONE || UNITY_WEBPLAYER
         //Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
         horizontal = (int)(Input.GetAxisRaw("Horizontal"));
 
@@ -54,6 +63,15 @@ public class Player : MovingObject {
         if (horizontal != 0) {
 			vertical = 0;
 		}
+
+/*    #else 
+
+        if(Input.touchCount > 0)
+        {
+            Touch myTouch = Input.touches[0];
+            if(myTouch == Input.touches[0];
+        }*/
+
         if(horizontal !=0 || vertical != 0)
         {
             AttemptMove<Wall>(horizontal, vertical);//we are expecting that the player collides with a wall
@@ -74,7 +92,14 @@ public class Player : MovingObject {
 
         base.AttemptMove<T>(xDir, yDir);
 
-        //RaycastHit2D hit;
+        
+
+        RaycastHit2D hit;
+
+        if (Move(xDir, yDir, out hit))
+        {
+            SoundManager.instance.RandomizeSfx(moveSound1,moveSound2);
+        }
 
         CheckIfGameOver();
 
@@ -188,12 +213,14 @@ public class Player : MovingObject {
         {
             food += pointsPerFood;
             foodText.text = "+" + pointsPerFood + " Food: " + food;
+            SoundManager.instance.RandomizeSfx(eatSound1, eatSound2);
             other.gameObject.SetActive(false);
         }
         else if(other.tag == "Soda")
         {
             food += pointsPerSoda;
             foodText.text = "+" + pointsPerSoda + " Food: " + food;
+            SoundManager.instance.RandomizeSfx(drinkSound1, drinkSound2);
             other.gameObject.SetActive(false);
         }
     }
@@ -223,6 +250,8 @@ public class Player : MovingObject {
     {
         if(food <= 0)
         {
+            SoundManager.instance.PlaySingle(gameOverSound);
+            SoundManager.instance.musicSource.Stop();
             GameManager.instance.GameOver();
         }
     }
