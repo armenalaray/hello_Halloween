@@ -25,7 +25,7 @@ public class Player : MovingObject {
     private Animator animator;
     private int food;
 
-    //private Vector2 touchOrigin = -Vector2.one;
+    private Vector2 touchOrigin = -Vector2.one;
 
     delegate void MyDelegate(int num1, int num2);
     MyDelegate myDelegate; 
@@ -53,7 +53,8 @@ public class Player : MovingObject {
         //Debug.Log(GameManager.instance.playersTurn);
         int horizontal =0 ;
         int vertical = 0;
-    //#if UNITY_STANDALONE || UNITY_WEBPLAYER
+
+    #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
         //Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
         horizontal = (int)(Input.GetAxisRaw("Horizontal"));
 
@@ -64,13 +65,34 @@ public class Player : MovingObject {
 			vertical = 0;
 		}
 
-/*    #else 
+      #else 
 
         if(Input.touchCount > 0)
         {
             Touch myTouch = Input.touches[0];
-            if(myTouch == Input.touches[0];
-        }*/
+            if(myTouch.phase == TouchPhase.Began)
+            {
+                touchOrigin = myTouch.position;
+            }
+            else if( myTouch.phase == TouchPhase.Ended && touchOrigin.x >= 0)
+            {
+                Vector2 touchEnd = myTouch.position;
+                float x = touchEnd.x - touchOrigin.x;
+                float y = touchEnd.y - touchOrigin.y;
+                touchOrigin.x = -1;
+
+                if(Mathf.Abs(x) > Mathf.Abs(y))
+                {
+                    horizontal = x > 0 ? 1 : -1;
+                }
+                else
+                {
+                    vertical = y > 0 ? 1 : -1;
+                }
+            }
+        }
+
+        #endif
 
         if(horizontal !=0 || vertical != 0)
         {
