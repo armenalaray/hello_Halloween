@@ -48,11 +48,19 @@ public class Player : MovingObject {
 
 	// Update is called once per frame
 	void Update () {
+
         //si no es el turno del jugador no ejecuta lo siguiente
-        if (!GameManager.instance.playersTurn) return;
+        if (!GameManager.instance.playersTurn)
+        {
+            //animator.SetFloat("horizontal", 0.0f);
+            //animator.SetFloat("vertical", 0.0f);
+            return;
+        }
+        
         //Debug.Log(GameManager.instance.playersTurn);
         int horizontal =0 ;
         int vertical = 0;
+        int idleState = 0;
 
     #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
         //Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
@@ -65,7 +73,7 @@ public class Player : MovingObject {
 			vertical = 0;
 		}
 
-      #else 
+#else
 
         if(Input.touchCount > 0)
         {
@@ -92,11 +100,38 @@ public class Player : MovingObject {
             }
         }
 
-        #endif
+#endif
+        
 
-        if(horizontal !=0 || vertical != 0)
+
+        if (horizontal !=0 || vertical != 0)
         {
+            animator.SetFloat("horizontal", (float)horizontal);
+            animator.SetFloat("vertical", (float)vertical);
+            
+            
             AttemptMove<Wall>(horizontal, vertical);//we are expecting that the player collides with a wall
+
+
+            
+           if (horizontal == 1)
+            {
+                idleState = 0;
+            }
+            else if(horizontal == -1)
+            {
+                idleState = 1;
+            }
+            else if(vertical == 1)
+            {
+                idleState = 2;
+            }
+            else
+            {
+                idleState = 3;
+            }
+            animator.SetFloat("idleState", (float)idleState);
+
         }
 	}
 
@@ -108,8 +143,8 @@ public class Player : MovingObject {
 
         //Debug.Log("xDir= " + xDir + " YDir= " + yDir);
         //animation triggers
-        myDelegate = animationTrigger;
-        myDelegate(xDir, yDir);
+        //myDelegate = animationTrigger;
+        //myDelegate(xDir, yDir);
 
 
         base.AttemptMove<T>(xDir, yDir);
@@ -126,6 +161,7 @@ public class Player : MovingObject {
         CheckIfGameOver();
 
         GameManager.instance.playersTurn = false;
+        
     }
 
     void animationTrigger(int xDir, int yDir)

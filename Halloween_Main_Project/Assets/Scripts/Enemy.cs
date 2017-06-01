@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Enemy : MovingObject {
     public int playerDamage;
+   // public Animator playerAnimator;
 
     private Animator animator;
     private Transform target;
@@ -48,6 +49,8 @@ public class Enemy : MovingObject {
             xDir = target.position.x > this.transform.position.x ? 1 : -1;
         }
         AttemptMove<Player>(xDir, yDir);
+        //playerAnimator.SetFloat("horizontal", 0.0f);
+        //playerAnimator.SetFloat("vertical", 0.0f);
     }
 
     protected override void OnCantMove<T>(T component)
