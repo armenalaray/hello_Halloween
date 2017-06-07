@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     public int playerFoodPoints = 100;
     [HideInInspector]
     public bool playersTurn = true;
+	public Animator playerAnimator;
 
     private BoardManagerFixed boardScript;
     private Text levelText;
@@ -72,6 +73,9 @@ public class GameManager : MonoBehaviour {
         //clear once the level inicializes
         enemies.Clear();
         boardScript.SetupScene(level);
+
+		playerAnimator = GameObject.FindGameObjectWithTag ("Player").GetComponent<Animator>();
+
     }
 
     private void HideLevelImage()
@@ -92,6 +96,8 @@ public class GameManager : MonoBehaviour {
         if (playersTurn || enemiesMoving || doingSetup)
             return;
 
+		//playerAnimator.SetFloat("horizontal", 0);
+		//playerAnimator.SetFloat("vertical", 0);
         StartCoroutine(MoveEnemies());
     }
 
