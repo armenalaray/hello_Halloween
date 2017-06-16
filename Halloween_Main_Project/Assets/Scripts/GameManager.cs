@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour {
         enemies.Clear();
         boardScript.SetupScene(level);
 
-		playerAnimator = GameObject.FindGameObjectWithTag ("Player").GetComponent<Animator>();
+		playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
 
     }
 
@@ -96,9 +96,15 @@ public class GameManager : MonoBehaviour {
         if (playersTurn || enemiesMoving || doingSetup)
             return;
 
-		//playerAnimator.SetFloat("horizontal", 0);
-		//playerAnimator.SetFloat("vertical", 0);
+        Invoke("PlayerAnimationStop", 0.5f);
+		
         StartCoroutine(MoveEnemies());
+    }
+
+    void PlayerAnimationStop()
+    {
+        playerAnimator.SetFloat("horizontal", 0);
+        playerAnimator.SetFloat("vertical", 0);
     }
 
     public void AddEnemyToList(Enemy script)
