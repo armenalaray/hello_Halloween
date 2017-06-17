@@ -10,14 +10,16 @@ public class GameManager : MonoBehaviour {
     public float turnDelay = .1f;
     public static GameManager instance = null;//singleton -static means that the variable belongs to the class rather than being an instanciation of the object. 
     public int playerFoodPoints = 100;
+    
     [HideInInspector]
     public bool playersTurn = true;
-	public Animator playerAnimator;
+	private Animator playerAnimator;
 
     private BoardManagerFixed boardScript;
     private Text levelText;
     private GameObject levelImage;
-    private int level = 1;
+    private GameObject restartButton;
+    public int level = 1;
     private List<Enemy> enemies;
     private bool enemiesMoving;//check if they're moving
     private bool doingSetup;//prevent player from moving while doing setup
@@ -38,13 +40,13 @@ public class GameManager : MonoBehaviour {
 
         boardScript = GetComponent<BoardManagerFixed>();
         //InitGame();
-	}
+    }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        
+   
         InitGame();
-        level++;
+        //level++;
 
     }
 
@@ -66,6 +68,10 @@ public class GameManager : MonoBehaviour {
         doingSetup = true;
         levelImage = GameObject.Find("LevelImage");
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
+
+        restartButton = GameObject.Find("RestartButton");
+        restartButton.SetActive(false);
+
         levelText.text = "Level " + level;
         levelImage.SetActive(true);
         Invoke("HideLevelImage", levelStartDelay);
@@ -86,9 +92,25 @@ public class GameManager : MonoBehaviour {
 
     public void GameOver()
     {
+        
         levelText.text = "After " + level + " Levels, you starved.";
         levelImage.SetActive(true);
-        enabled = false;
+        restartButton.SetActive(true);
+        Button temp = restartButton.GetComponent<Button>();
+        temp.onClick.AddListener(Restart);
+       
+        //enabled = false;
+    }
+
+    public void Restart()
+    {
+        Player playerRef = GameObject.Find("Player").GetComponent<Player>();
+        level = 1;
+        playerFoodPoints = 100;
+        playerRef.foodPointsRestart();
+
+        SceneManager.LoadScene(0);
+        Invoke("HideLevelImage", levelStartDelay);
     }
 
     void Update()

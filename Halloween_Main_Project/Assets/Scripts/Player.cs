@@ -39,11 +39,16 @@ public class Player : MovingObject {
         //call base function on MovingObject
         base.Start();
 	}
+
+    public void foodPointsRestart()
+    {
+        food = GameManager.instance.playerFoodPoints;
+    }
 	
-    private void OnDisable()
+    /*private void OnDisable()
     {
         GameManager.instance.playerFoodPoints = food;
-    }
+    }*/
 
 
 	// Update is called once per frame
@@ -294,6 +299,7 @@ public class Player : MovingObject {
     private void Restart()
     {
         SceneManager.LoadScene(0);
+        GameManager.instance.level++;
     }
 
     public void LoseFood(int loss)
@@ -308,8 +314,8 @@ public class Player : MovingObject {
     {
         if(food <= 0)
         {
-            SoundManager.instance.PlaySingle(gameOverSound);
-            SoundManager.instance.musicSource.Stop();
+            //SoundManager.instance.PlaySingle(gameOverSound);
+            //SoundManager.instance.musicSource.Stop();
             GameManager.instance.GameOver();
         }
     }
