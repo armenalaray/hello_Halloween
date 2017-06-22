@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SCR_Pathfinding : MonoBehaviour {
+    [HideInInspector]
     public SCR_Grid grid;
    
     void Awake()
@@ -71,22 +72,25 @@ public class SCR_Pathfinding : MonoBehaviour {
     }
     public void TakeStep()
     {
+        
         if (grid.path.Count >= 0)
         {
             transform.position = grid.path[0].position;
         }
+
     }
+
     int GetDistance(SCR_Node nodeA, SCR_Node nodeB)
     {
         int distX = Mathf.Abs(nodeA.gridX-nodeB.gridX);
         int distY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
         if(distX>distY)
         {
-            return 40*distY+10*(distX-distY);
+            return 14*distY+10*(distX-distY);
         }
         else
         {
-            return 40 * distX + 10 * (distY - distX);
+            return 14 * distX + 10 * (distY - distX);
 
         }
 

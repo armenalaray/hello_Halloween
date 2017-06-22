@@ -7,7 +7,7 @@ public class SCR_Grid : MonoBehaviour {
     public Vector2 gridSize;
     public float nodeRadius;
     public LayerMask unwalkableMask;
-    SCR_Node[,] grid;
+    public SCR_Node[,] grid;
     float nodeDiameter;
     int gridSizeX;
     int gridSizeY;
@@ -17,11 +17,14 @@ public class SCR_Grid : MonoBehaviour {
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridSize.y / nodeDiameter);
+    }
+    void Update()
+    {
         CreateGrid();
 
     }
 
-    void CreateGrid()
+    public void CreateGrid()
     {
         grid = new SCR_Node[gridSizeX, gridSizeY];
 		Vector3 WorldBottomLeft = transform.position - Vector3.right * gridSize.x / 2 - Vector3.up * gridSize.y / 2;
@@ -30,7 +33,8 @@ public class SCR_Grid : MonoBehaviour {
             for (int y = 0; y < gridSizeY; y++)
             {
 				Vector3 worldPoint = WorldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.up * (y * nodeDiameter + nodeRadius);
-                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius,unwalkableMask));
+                bool walkable = (Physics2D.OverlapCircle(worldPoint, nodeRadius-.3f, unwalkableMask) == null);
+                //bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius,unwalkableMask));
                 grid[x, y] = new SCR_Node(walkable, worldPoint, x ,y);
             }
         }
@@ -39,6 +43,7 @@ public class SCR_Grid : MonoBehaviour {
     {
         float percentX = (worldPosition.x - transform.position.x) / gridSize.x + 0.5f;
         float percentY = (worldPosition.y - transform.position.y) / gridSize.y + 0.5f;
+
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
         int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
@@ -52,7 +57,7 @@ public class SCR_Grid : MonoBehaviour {
         {
             for (int y = -1; y <= 1; y++)
             {
-                if (x==0&&y==00)
+                if ((x==0&&y==0)||(x==-1&&y==-1) || (x == 1 && y == -1) || (x == -1 && y == 1) || (x == 1 && y == 1))
                 {
                     continue;
                 }
