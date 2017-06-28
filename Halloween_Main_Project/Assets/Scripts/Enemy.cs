@@ -49,6 +49,7 @@ public class Enemy : MovingObject {
             xDir = target.position.x > this.transform.position.x ? 1 : -1;
         }
         AttemptMove<Player>(xDir, yDir);
+
         //playerAnimator.SetFloat("horizontal", 0.0f);
         //playerAnimator.SetFloat("vertical", 0.0f);
     }
