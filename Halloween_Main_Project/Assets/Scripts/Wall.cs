@@ -20,15 +20,21 @@ public class Wall : MonoBehaviour {
 	
 	public void DamageWall(int loss)
     {
+        int index = 0;
         SoundManager.instance.RandomizeSfx(chopSound1, chopSound2);
-        if (count % 2 == 1 && count < 5)
+        if (count == 0)
         {
-            int index = count / 2;
+            index = 0;
+            spriteRenderer.sprite = dmgSprite[index];
+        }
+        else if(count == 3)
+        {
+            index = 1;
             spriteRenderer.sprite = dmgSprite[index];
         }
 
         hp -= loss;
-        if(hp <= 0)
+        if(count == 5)
         {
             //wall disapppears si su hp es menor a 0
             gameObject.SetActive(false);
