@@ -75,7 +75,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AI\SCR_A_Turn_Unit.cs" />
     <Compile Include="Assets\Scripts\AI\SCR_A_Unit.cs" />
     <Compile Include="Assets\Scripts\AI\SCR_A_Units_Dmg.cs" />
     <Compile Include="Assets\Scripts\AI\SCR_Enemy_1.cs" />

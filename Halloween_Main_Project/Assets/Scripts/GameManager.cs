@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     public float levelStartDelay = 2.0f;
     public float turnDelay = .1f;
     public static GameManager instance = null;//singleton -static means that the variable belongs to the class rather than being an instanciation of the object. 
-    public int playerFoodPoints = 100;
+    public int playerFoodPoints;
     [HideInInspector]
     public bool playersTurn = true;
 	public Animator playerAnimator;
@@ -17,13 +17,15 @@ public class GameManager : MonoBehaviour {
     private BoardManagerFixed boardScript;
     private Text levelText;
     private GameObject levelImage;
-    private int level = 1;
+    public int level;
     private List<Enemy> enemies;
     [HideInInspector]
     public bool enemiesMoving;//check if they're moving
-    private bool doingSetup;//prevent player from moving while doing setup
-	// Use this for initialization
-	void Awake () {
+    [HideInInspector]
+    public bool doingSetup;//prevent player from moving while doing setup
+                           // Use this for initialization
+
+    void Awake () {
 
         if(instance == null)
         {
@@ -39,7 +41,9 @@ public class GameManager : MonoBehaviour {
 
         boardScript = GetComponent<BoardManagerFixed>();
         //InitGame();
-	}
+        playerFoodPoints = 100;
+        level = 1;
+    }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
@@ -106,7 +110,10 @@ public class GameManager : MonoBehaviour {
     {
         enemies.Add(script);
     }
-
+    void RestartGame()
+    {
+        SceneManager.LoadScene(0);
+    }
     IEnumerator MoveEnemies()
     {
         enemiesMoving = true;

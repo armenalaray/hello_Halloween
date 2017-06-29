@@ -7,7 +7,7 @@ public abstract class MovingObject : MonoBehaviour {
     public float moveTime = 0.01f;//movement of the object
     public float turnDelay = 1.0f;
     public LayerMask blockingLayer;//layer to detect colisions
-
+    public Vector3 targetPos;
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb2D;
     private float inverseMoveTime;
@@ -23,6 +23,7 @@ public abstract class MovingObject : MonoBehaviour {
     {
         Vector2 start = transform.position;
         Vector2 end = start + new Vector2(xDir, yDir);
+        targetPos = new Vector3(end.x,end.y,0);
         boxCollider.enabled = false;//prevent from hitting own collider
         hit = Physics2D.Linecast(start, end, blockingLayer);
 

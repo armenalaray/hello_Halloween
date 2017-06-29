@@ -22,6 +22,7 @@ public class Player : MovingObject {
     public AudioClip drinkSound2;
     public AudioClip gameOverSound;
 
+
     private Animator animator;
     [HideInInspector]
     public int food;
@@ -49,7 +50,6 @@ public class Player : MovingObject {
 
 	// Update is called once per frame
 	void Update () {
-
         //si no es el turno del jugador no ejecuta lo siguiente
         if (!GameManager.instance.playersTurn)
         {
@@ -147,7 +147,7 @@ public class Player : MovingObject {
         //myDelegate = animationTrigger;
         //myDelegate(xDir, yDir);
 
-
+        
         base.AttemptMove<T>(xDir, yDir);
 
         
@@ -279,7 +279,7 @@ public class Player : MovingObject {
         {
             food += pointsPerSoda;
             foodText.text = "+" + pointsPerSoda + " Food: " + food;
-            SoundManager.instance.RandomizeSfx(drinkSound1, drinkSound2);
+            SoundManager.instance.RandomizeSfx(drinkSound1, drinkSound1);
             other.gameObject.SetActive(false);
         }
         else if(other.CompareTag("Dmg"))
@@ -288,9 +288,10 @@ public class Player : MovingObject {
             food -= other.GetComponentInParent<SCR_A_Unit>().dmg;
             CheckIfGameOver();
             foodText.text = "-" + other.GetComponentInParent<SCR_A_Unit>().dmg + " Food: " + food;
+            //other.transform.parent.gameObject.GetComponent<Animator>().SetTrigger("isAttacking");
             other.gameObject.SetActive(false);
-            //Add Audio
-            //SoundManager.instance.RandomizeSfx(drinkSound1, drinkSound2);
+
+
         }
     }
     protected override void OnCantMove<T>(T component)
@@ -304,7 +305,7 @@ public class Player : MovingObject {
 
     private void Restart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void LoseFood(int loss)

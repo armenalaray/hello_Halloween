@@ -5,6 +5,7 @@ using UnityEngine;
 public class SCR_A_Unit : MonoBehaviour {
     SCR_Pathfinding path;
     GameObject player;
+    GameManager gm;
     Animator anim;
     Vector3 prevpos;
     private float moveCounter = 0.0f;
@@ -16,24 +17,26 @@ public class SCR_A_Unit : MonoBehaviour {
     {
         player = GameObject.FindGameObjectWithTag("Player");
         path = GameObject.FindGameObjectWithTag("A*").GetComponent<SCR_Pathfinding>();
-        
+        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update () {
         path.FindPath(gameObject.transform.position, player.transform.position);
-
-        moveCounter += Time.deltaTime;
+        if (gm.doingSetup==false)
+        {
+            moveCounter += Time.deltaTime;
+        }
         if (moveCounter > speed)
         {
             TakeStep();
             moveCounter = 0.0f;
         }
+
         if (transform.position == player.transform.position)
         {
             transform.position = prevpos;
         }
-
         CheckHP();
     }
     
@@ -53,7 +56,12 @@ public class SCR_A_Unit : MonoBehaviour {
             transform.GetChild(0).gameObject.SetActive(true);
 
         }
-        
+        if (path.grid.path[0].position == player.GetComponent<Player>().targetPos)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+            transform.position = prevpos;
+        }
+
 
     }
     void CheckHP()
