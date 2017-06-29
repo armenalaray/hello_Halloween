@@ -284,11 +284,13 @@ public class Player : MovingObject {
         }
         else if(other.CompareTag("Dmg"))
         {
-            food -= 10;
+            
+            food -= other.GetComponentInParent<SCR_A_Unit>().dmg;
+            CheckIfGameOver();
+            foodText.text = "-" + other.GetComponentInParent<SCR_A_Unit>().dmg + " Food: " + food;
             other.gameObject.SetActive(false);
             //Add Audio
             //SoundManager.instance.RandomizeSfx(drinkSound1, drinkSound2);
-            foodText.text ="-" + 10 + " Food: " + food;
         }
     }
     protected override void OnCantMove<T>(T component)
