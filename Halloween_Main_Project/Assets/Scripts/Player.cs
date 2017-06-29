@@ -23,7 +23,8 @@ public class Player : MovingObject {
     public AudioClip gameOverSound;
 
     private Animator animator;
-    private int food;
+    [HideInInspector]
+    public int food;
 
     private Vector2 touchOrigin = -Vector2.one;
 
@@ -150,7 +151,7 @@ public class Player : MovingObject {
         base.AttemptMove<T>(xDir, yDir);
 
         
-
+        
         RaycastHit2D hit;
 
         if (Move(xDir, yDir, out hit))
@@ -280,6 +281,14 @@ public class Player : MovingObject {
             foodText.text = "+" + pointsPerSoda + " Food: " + food;
             SoundManager.instance.RandomizeSfx(drinkSound1, drinkSound2);
             other.gameObject.SetActive(false);
+        }
+        else if(other.CompareTag("Dmg"))
+        {
+            food -= 10;
+            other.gameObject.SetActive(false);
+            //Add Audio
+            //SoundManager.instance.RandomizeSfx(drinkSound1, drinkSound2);
+            foodText.text ="-" + 10 + " Food: " + food;
         }
     }
     protected override void OnCantMove<T>(T component)

@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour {
     private GameObject levelImage;
     private int level = 1;
     private List<Enemy> enemies;
-    private bool enemiesMoving;//check if they're moving
+    [HideInInspector]
+    public bool enemiesMoving;//check if they're moving
     private bool doingSetup;//prevent player from moving while doing setup
 	// Use this for initialization
 	void Awake () {

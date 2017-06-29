@@ -23,6 +23,7 @@ public class SCR_MenuScript : MonoBehaviour {
         quitMenu.SetActive(true);
         mainMenu.SetActive(false);
 
+
     }
     public void OptionPress()
     {
@@ -40,10 +41,6 @@ public class SCR_MenuScript : MonoBehaviour {
 		creditsUI.SetActive (true);
 		mainMenu.SetActive(false);
 
-	}
-	public void CreditsBackPress()
-	{
-		
 	}
     public void CancelQuitPress()
     {
