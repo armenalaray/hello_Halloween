@@ -73,6 +73,7 @@ public class SCR_Grid : MonoBehaviour {
         return neighbours;
     }
     public List<SCR_Node> path;
+    /*
     void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(gridSize.x, gridSize.y,1));
@@ -96,6 +97,6 @@ public class SCR_Grid : MonoBehaviour {
             }
         }
     }
-
+    */
 
 }
