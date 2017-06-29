@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     public float levelStartDelay = 2.0f;
     public float turnDelay = .1f;
     public static GameManager instance = null;//singleton -static means that the variable belongs to the class rather than being an instanciation of the object. 
-    public int playerFoodPoints = 100;
+    public int playerFoodPoints;
     
     [HideInInspector]
     public bool playersTurn = true;
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
     private Text levelText;
     private GameObject levelImage;
     private GameObject restartButton;
-    public int level = 1;
+    public int level;
     private List<Enemy> enemies;
     private bool enemiesMoving;//check if they're moving
     private bool doingSetup;//prevent player from moving while doing setup
@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour {
 
         boardScript = GetComponent<BoardManagerFixed>();
         //InitGame();
+        playerFoodPoints = 100;
+        level = 1;
     }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
@@ -97,19 +99,18 @@ public class GameManager : MonoBehaviour {
         levelImage.SetActive(true);
         restartButton.SetActive(true);
         Button temp = restartButton.GetComponent<Button>();
-        temp.onClick.AddListener(Restart);
+        temp.onClick.AddListener(RestartGame);
        
         //enabled = false;
     }
 
-    public void Restart()
+    public void RestartGame()
     {
         Player playerRef = GameObject.Find("Player").GetComponent<Player>();
         level = 1;
+        SceneManager.LoadScene(0);
         playerFoodPoints = 100;
         playerRef.foodPointsRestart();
-
-        SceneManager.LoadScene(0);
         Invoke("HideLevelImage", levelStartDelay);
     }
 

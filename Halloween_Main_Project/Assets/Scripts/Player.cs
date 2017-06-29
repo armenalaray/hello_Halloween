@@ -42,13 +42,18 @@ public class Player : MovingObject {
 
     public void foodPointsRestart()
     {
-        food = GameManager.instance.playerFoodPoints;
+        food = 100;
     }
 	
-    /*private void OnDisable()
+    private void OnDisable()
     {
         GameManager.instance.playerFoodPoints = food;
-    }*/
+    }
+
+    public void onEnable()
+    {
+        
+    }
 
 
 	// Update is called once per frame
