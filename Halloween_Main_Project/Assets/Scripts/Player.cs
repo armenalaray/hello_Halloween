@@ -21,6 +21,8 @@ public class Player : MovingObject {
     public AudioClip drinkSound1;
     public AudioClip drinkSound2;
     public AudioClip gameOverSound;
+    public AudioClip damage1;
+    public AudioClip damage2;
 
 
     private Animator animator;
@@ -288,9 +290,10 @@ public class Player : MovingObject {
             food -= other.GetComponentInParent<SCR_A_Unit>().dmg;
             CheckIfGameOver();
             foodText.text = "-" + other.GetComponentInParent<SCR_A_Unit>().dmg + " Food: " + food;
-            //other.transform.parent.gameObject.GetComponent<Animator>().SetTrigger("isAttacking");
+            // other.transform.parent.gameObject.GetComponent<>().SetTrigger("isAttacking");
+            SoundManager.instance.RandomizeSfx(damage1, damage2);
             other.gameObject.SetActive(false);
-
+           
 
         }
     }
