@@ -10,10 +10,7 @@ public class GameManager : MonoBehaviour {
     public float turnDelay = .1f;
     public static GameManager instance = null;//singleton -static means that the variable belongs to the class rather than being an instanciation of the object. 
     public int playerFoodPoints;
-<<<<<<< HEAD
-    
-=======
->>>>>>> refs/remotes/origin/AITest
+
     [HideInInspector]
     public bool playersTurn = true;
 	private Animator playerAnimator;
@@ -21,10 +18,9 @@ public class GameManager : MonoBehaviour {
     private BoardManagerFixed boardScript;
     private Text levelText;
     private GameObject levelImage;
-<<<<<<< HEAD
+
     private GameObject restartButton;
-=======
->>>>>>> refs/remotes/origin/AITest
+
     public int level;
     private List<Enemy> enemies;
     [HideInInspector]
@@ -105,6 +101,7 @@ public class GameManager : MonoBehaviour {
     {
         
         levelText.text = "After " + level + " Levels, you starved.";
+        
         levelImage.SetActive(true);
         restartButton.SetActive(true);
         Button temp = restartButton.GetComponent<Button>();
@@ -113,7 +110,7 @@ public class GameManager : MonoBehaviour {
         //enabled = false;
     }
 
-    public void RestartGame()
+    /*public void RestartGame()
     {
         Player playerRef = GameObject.Find("Player").GetComponent<Player>();
         level = 1;
@@ -121,7 +118,7 @@ public class GameManager : MonoBehaviour {
         playerFoodPoints = 100;
         playerRef.foodPointsRestart();
         Invoke("HideLevelImage", levelStartDelay);
-    }
+    }*/
 
     void Update()
     {
@@ -145,7 +142,11 @@ public class GameManager : MonoBehaviour {
     }
     void RestartGame()
     {
-        SceneManager.LoadScene(0);
+        playerFoodPoints = 100;
+        level = 1;
+        Player myPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        myPlayer.restartPoints();
+         SceneManager.LoadScene(0);
     }
     IEnumerator MoveEnemies()
     {

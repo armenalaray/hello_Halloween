@@ -52,9 +52,9 @@ public class Player : MovingObject {
         GameManager.instance.playerFoodPoints = food;
     }
 
-    public void onEnable()
+   public void restartPoints()
     {
-        
+        food = GameManager.instance.playerFoodPoints;
     }
 
 
@@ -315,12 +315,11 @@ public class Player : MovingObject {
 
     private void Restart()
     {
-<<<<<<< HEAD
-        SceneManager.LoadScene(0);
+
         GameManager.instance.level++;
-=======
+ 
         SceneManager.LoadScene(1);
->>>>>>> refs/remotes/origin/AITest
+
     }
 
     public void LoseFood(int loss)

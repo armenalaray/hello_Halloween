@@ -85,11 +85,13 @@
     <Compile Include="Assets\Scripts\AI\SCR_Projectiles.cs" />
     <Compile Include="Assets\Scripts\BoardManager.cs" />
     <Compile Include="Assets\Scripts\BoardManagerFixed.cs" />
+    <Compile Include="Assets\Scripts\ChilliAttack.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Loader.cs" />
     <Compile Include="Assets\Scripts\MovingObject.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Restart.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\UI\SCR_Credits.cs" />
     <Compile Include="Assets\Scripts\UI\SCR_InGameActions.cs" />

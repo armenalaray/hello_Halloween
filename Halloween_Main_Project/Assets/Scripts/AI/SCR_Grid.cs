@@ -73,30 +73,30 @@ public class SCR_Grid : MonoBehaviour {
         return neighbours;
     }
     public List<SCR_Node> path;
-    /*
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(transform.position, new Vector3(gridSize.x, gridSize.y,1));
-        
-        if (grid!=null)
-        {
-            foreach (SCR_Node n in grid)
-            {
-                
-                Gizmos.color = (n.isWalkable)?Color.white:Color.red;
-                if (path != null)
-                {
-                    if (path.Contains(n))
-                    {
-                        Gizmos.color = Color.black;
-                    }
-                }
-                    
-                
-                Gizmos.DrawCube(n.position, Vector3.one * (nodeDiameter - .1f));
-            }
-        }
-    }
-    */
+    
+    //void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireCube(transform.position, new Vector3(gridSize.x, gridSize.y,1));
+    //    
+    //    if (grid!=null)
+    //    {
+    //        foreach (SCR_Node n in grid)
+    //        {
+    //            
+    //            Gizmos.color = (n.isWalkable)?Color.white:Color.red;
+    //            if (path != null)
+    //            {
+    //                if (path.Contains(n))
+    //                {
+    //                    Gizmos.color = Color.black;
+    //                }
+    //            }
+    //                
+    //            
+    //            Gizmos.DrawCube(n.position, Vector3.one * (nodeDiameter - .1f));
+    //        }
+    //    }
+    //}
+    
 
 }
