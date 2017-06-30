@@ -20,7 +20,7 @@ public class SCR_Credits : MonoBehaviour {
         timetoChange -= Time.deltaTime;
         if (timetoChange >= 0)
         {
-            transform.position += (Vector3.up);
+            transform.position += (Vector3.up*2);
         }
         else if(timetoChange<0)
         {
