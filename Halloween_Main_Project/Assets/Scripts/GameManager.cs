@@ -39,6 +39,10 @@ public class GameManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+        /*if (!instance.enabled)
+        {
+            instance.enabled = true;
+        }*/
 
         DontDestroyOnLoad(gameObject);
         enemies = new List<Enemy>();
@@ -47,6 +51,7 @@ public class GameManager : MonoBehaviour {
         //InitGame();
         playerFoodPoints = 100;
         level = 1;
+      
     }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
@@ -146,6 +151,7 @@ public class GameManager : MonoBehaviour {
         level = 1;
         Player myPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         myPlayer.restartPoints();
+        //instance.enabled = false;
          SceneManager.LoadScene(0);
     }
     IEnumerator MoveEnemies()
