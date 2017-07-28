@@ -10,18 +10,18 @@ public class GameManager : MonoBehaviour {
     public float turnDelay = .1f;
     public static GameManager instance = null;//singleton -static means that the variable belongs to the class rather than being an instanciation of the object. 
     public int playerFoodPoints;
+    public Sprite[] cutSceneArray;
+    public int level;
 
     [HideInInspector]
     public bool playersTurn = true;
 	private Animator playerAnimator;
-
     private BoardManagerFixed boardScript;
     private Text levelText;
     private GameObject levelImage;
-
     private GameObject restartButton;
 
-    public int level;
+
     private List<Enemy> enemies;
     [HideInInspector]
     public bool enemiesMoving;//check if they're moving
@@ -59,7 +59,6 @@ public class GameManager : MonoBehaviour {
    
         InitGame();
         //level++;
-
     }
 
     void OnEnable()
@@ -80,20 +79,43 @@ public class GameManager : MonoBehaviour {
         doingSetup = true;
         levelImage = GameObject.Find("LevelImage");
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
-
         restartButton = GameObject.Find("RestartButton");
         restartButton.SetActive(false);
 
         levelText.text = "Level " + level;
         levelImage.SetActive(true);
-        Invoke("HideLevelImage", levelStartDelay);
+
+        if(level == 1)
+        {
+            levelText.enabled = false;
+            StartCoroutine("changeCutScene");
+        }
+        else
+        {
+            Invoke("HideLevelImage", levelStartDelay);
+        }
+
 
         //clear once the level inicializes
         enemies.Clear();
         boardScript.SetupScene(level);
 
 		playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+    }
 
+    IEnumerator changeCutScene()
+    {
+        Image cutScene = levelImage.GetComponent<Image>();
+        for (int i = 0;  i < cutSceneArray.Length; i++) 
+        {
+            if(i == cutSceneArray.Length - 1)
+            {
+                levelText.enabled = true;
+            }
+            cutScene.sprite = cutSceneArray[i];
+            yield return new WaitForSeconds(5.0f);
+        }
+        HideLevelImage();
     }
 
     private void HideLevelImage()
