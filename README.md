@@ -4,4 +4,6 @@ It's Halloween Night! and you are a kid that went out to play trick or treat, bu
 
 Now its your time! Is your chance to become a hero and rescue your dog from the crazy monsters you will encounter.
 
-Halloween Night is a Top-down Roguelike Mobile game made in Unity/C#.   
+Halloween Night is a Top-down Roguelike Mobile game made in Unity/C#. 
+
+NOTE: If you want to try the game download Android 7 APK from Builds folder inside Halloween Main Project
