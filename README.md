@@ -1,14 +1,7 @@
 # HALLOWEEN NIGHT - game
 
-# IMPORTANTE! 
-# Favor de trabajar en la version 5.5.1f1 de Unity.
+It's Halloween Night! and you are a kid that went out to play trick or treat, but hey! some badass guys try to steal your candy and you and your dog ran out, you stumble upon a rock and your dog has entered the cemetery. 
 
-En la escuela hay compus que, a pesar de tener esta version, no permiten dar commits, asi que tomenlo en consideracion. al empezar a trabajar en una de las compus de la escuela.
+Now its your time! Is your chance to become a hero and rescue your dog from the crazy monsters you will encounter.
 
-una solucion es que guarden el proyecto y lo suban en sus compus personales. o busquen una compu en la que si puedan subirlo al servidor de Git. 
-
-# importante.
-
-Recuerden que al trabajar con github for desktop, despues de hacer commits tienen que dar Sync para que todos los demás puedan ver los cambios en su branch. 
-
-Gracias!
+Halloween Night is a Top-down Roguelike Mobile game made in Unity/C#.   
