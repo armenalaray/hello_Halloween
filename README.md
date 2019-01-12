@@ -6,4 +6,7 @@ Now its your time! Is your chance to become a hero and rescue your dog from the 
 
 Halloween Night is a Top-down Roguelike Mobile game made in Unity/C#. 
 
-NOTE: If you want to try the game download Android 7 APK from Builds folder inside Halloween Main Project
+NOTE: If you want to try the game go to "hello_Halloween/Halloween_Main_Project/Builds/" and download Android7.apk
+
+        
+      
